@@ -3,12 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<style>
-	#text {
-		height: 50px;
-	}
-	#list {
-		margin : 10px;
-	}
 	.area {
 	    position: absolute;
 	    background: #fff;
@@ -19,7 +13,6 @@
 	    left: 15px;
 	    padding:2px;
 	}
-	#mapwrap{position:relative;overflow:hidden;}
 	</style>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=API KEY 삽입"></script>
@@ -27,19 +20,9 @@
 </head>
 <body>
 
-	<div id="text"></div>
+<div id="map" style="width:500px;height:500px;"></div>
 
-	<div id="mapwrap">
-		<div id="map" style="width:500px;height:500px;"></div>
-	</div>
-	
-	<div id="list">
-		<input type="button" code="11" value="서울" />
-		<input type="button" code="26" value="부산" />
-		<input type="button" code="28" value="인천" />
-		<input type="button" code="41" value="경기" />
-		<input type="button" code="50" value="제주" />
-	</div>
+
 <script>
 var pHandler, map;
 
