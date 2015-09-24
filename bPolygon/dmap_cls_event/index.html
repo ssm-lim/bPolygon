@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style>
+	#text {
+		height: 50px;
+	}
+	#list {
+		margin : 10px;
+	}
+	.area {
+	    position: absolute;
+	    background: #fff;
+	    border: 1px solid #888;
+	    border-radius: 3px;
+	    font-size: 12px;
+	    top: -5px;
+	    left: 15px;
+	    padding:2px;
+	}
+	#mapwrap{position:relative;overflow:hidden;}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=API KEY 삽입"></script>
+	<script type="text/javascript" src="./bPolygon.js"></script>
+</head>
+<body>
+
+	<div id="text"></div>
+
+	<div id="mapwrap">
+		<div id="map" style="width:500px;height:500px;"></div>
+	</div>
+	
+	<div id="list">
+		<input type="button" code="11" value="서울" />
+		<input type="button" code="26" value="부산" />
+		<input type="button" code="28" value="인천" />
+		<input type="button" code="41" value="경기" />
+		<input type="button" code="50" value="제주" />
+	</div>
+<script>
+var pHandler, map;
+
+setTimeout(function(){
+	// 맵 초기화
+	// 맵 배경을 단색으로 사용
+	var mapContainer = document.getElementById('map'), 
+	mapOption = { 
+	    center: new daum.maps.LatLng(37.56507377165696,126.97733128939345),
+	    disableDoubleClick : true,
+	    level: 9
+	};
+	// 맵 생성
+	map = new daum.maps.Map(mapContainer, mapOption);
+	// 맵 배경을 단색으로 사용
+	
+	// 맵에 띄울 polygon 설정 초기화
+	bPolygon = new bPolygon(map);
+	// 이벤트 설정
+	bPolygon.event = {
+			mouseover : {
+				pathFn : function(me, polygons){
+					$.each($(polygons), function(idx, polygon){
+						polygon.setOptions({fillColor: '#09f'});
+					});
+				}
+			},
+			mouseout : {
+				pathFn : function(me, polygons){
+					$.each($(polygons), function(idx, polygon){
+						polygon.setOptions({fillColor: '#fff'});
+					});
+				}
+			},
+			click : {
+				pathFn : function(me, polygons, region){
+					var data = me.geoData[me.nowPlace];
+					if(me.selected == region){
+						if(me.isToggled){
+							me.event.mouseover.pathFn(me, polygons);
+							$(".polygon-grp-" + me.selected).on('mouseover', { polygons : data[me.selected].polygonObj.polygon}, function(e){
+								me.event.mouseover.pathFn(me, polygons);
+							});
+							$(".polygon-grp-" + me.selected).on('mouseout', { polygons : data[me.selected].polygonObj.polygon}, function(e){
+								me.event.mouseout.pathFn(me, polygons);
+							});
+							me.selected = null;
+							me.isToggled = !me.isToggled;
+						} 
+					} else {
+						$(".polygon-grp-" + region).unbind('mouseover');
+						$(".polygon-grp-" + region).unbind('mouseout');
+						$.each($(polygons), function(idx, polygon){
+							polygon.setOptions({fillColor: '#B70037'});
+						});
+						
+						if(me.isToggled){
+							var newPolygons = data[me.selected].polygonObj.polygon;
+							$(".polygon-grp-" + me.selected).on('mouseover', { polygons : data[me.selected].polygonObj.polygon}, function(e){
+								me.event.mouseover.pathFn(me, newPolygons);
+							});
+							$(".polygon-grp-" + me.selected).on('mouseout', { polygons : data[me.selected].polygonObj.polygon}, function(e){
+								me.event.mouseout.pathFn(me, newPolygons);
+							});
+							me.event.mouseout.pathFn(me, newPolygons);
+						} else {
+							me.isToggled = !me.isToggled;
+						}
+						me.selected = region;
+					}
+				}
+			}
+	}
+	
+	bPolygon.init('11');
+	
+}, 300);
+</script>
+</body>
+</html>
