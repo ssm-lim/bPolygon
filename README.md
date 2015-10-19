@@ -10,12 +10,11 @@
 
 # highmaps
 - highmap을 이용하여 만들었으며 클릭시 지역이 확대되는 기능이 있음.
-- 그 외의 기능 없음. 그냥 예제 가져다가 geojson만 바꿨음.
+- function 객체 형태로 만듬
+- http://nickyv.tistory.com/23
 
 
 행정구역 경계 데이터 - http://www.gisdeveloper.co.kr/979/
-
 다음 API - http://apis.map.daum.net/
-
 개발시 참고 - http://nickyv.tistory.com/15/
 
