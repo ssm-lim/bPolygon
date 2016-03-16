@@ -11,10 +11,10 @@
 # highmaps
 - highmap을 이용하여 만들었으며 클릭시 지역이 확대되는 기능이 있음.
 - function 객체 형태로 만듬
-- http://nickyv.tistory.com/23
+- http://ssmlim.tistory.com/23
 
 
-행정구역 경계 데이터 - http://www.gisdeveloper.co.kr/979/
-다음 API - http://apis.map.daum.net/
-개발시 참고 - http://nickyv.tistory.com/15/
+행정구역 경계 데이터 - http://www.gisdeveloper.co.kr/979/<br/>
+다음 API - http://apis.map.daum.net/<br/>
+개발시 참고 - http://ssmlim.tistory.com/15/<br/>
 
