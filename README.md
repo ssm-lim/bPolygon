@@ -1,4 +1,4 @@
-네이버 부동산(http://land.naver.com/)에 있는 Map같이 행정구역 경계 단위를 표시하는 것을 다음 map Api로 구현했습니다.
+네이버 부동산(http://land.naver.com) 에 있는 Map같이 행정구역 경계 단위를 표시하는 것을 다음 map Api로 구현했습니다.
 
 #dmap_event
 - api에서 제공하는 addListener로 이벤트 처리.
@@ -14,7 +14,7 @@
 - http://ssmlim.tistory.com/23
 
 
-행정구역 경계 데이터 - http://www.gisdeveloper.co.kr/979/<br/>
+행정구역 경계 데이터 - http://www.biz-gis.com/index.php?mid=pds&document_srl=193760<br/>
 다음 API - http://apis.map.daum.net/<br/>
-개발시 참고 - http://ssmlim.tistory.com/15/<br/>
+개발시 참고 - http://ssmlim.tistory.com/15<br/>- http://ssmlim.tistory.com/18<br/>- http://ssmlim.tistory.com/19<br/>- 
 
