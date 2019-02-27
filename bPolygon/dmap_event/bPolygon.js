@@ -33,6 +33,7 @@ bPolygon.prototype.getInfo = function(){
 bPolygon.prototype.getData = function(rCode){
 	var me = this; 
 	// rCode를 받아 해당 지역의 객체정보가 없다면 json 호출
+	var deferred = $.Deferred();
 	if(!me.geoData[rCode]){
 		$.getJSON('./geojson/' + rCode + '.json', function (geojson) {
 			var data = geojson.features, geo = {};
@@ -53,19 +54,16 @@ bPolygon.prototype.getData = function(rCode){
 				};
 			});
 			me.geoData[rCode] = geo;
-		});
-	}
-	// 
-	// 비동기로 인해 결과가 undefined로 뜨는 것을 막기 위해 setTimeout, $.Deferred 사용
-	return function(){
-		var deferred = $.Deferred();
-		// 사용환경에 따라 시간 조정... 
-		// 조언 필요...ㅠㅠ
-		setTimeout(function() {
+		}).then(function() {
+			//가공된 데이터를 done callback함수에 전달
 			deferred.resolve(me.geoData[rCode]);
-		}, 500);
+			return deferred.promise();
+		});;
+	} else {
+		// ajax 통하지 않은 결과 데이터를 수동으로 ajax callback 데이터 형태로 전환해서 전달
+		deferred.resolve(me.geoData[rCode]);
 		return deferred.promise();
-	}();
+	}
 };
 
 // polygon 객체 생성
